@@ -9,11 +9,11 @@ package ru.job4j;
 public class Calculate {
 	
 	/**
-	 * Конструктор, вывод строки в консоль
+	 * Точка входа в программу, вывод строки в консоль
 	 * @param args массив строк
 	 * @return void	 
 	 */
 	public static void main(String[] args) {
-		System.out.println("Hello world.");
+		System.out.println("Hello World!");
 	}
 }
