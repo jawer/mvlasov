@@ -14,11 +14,10 @@ import static org.junit.Assert.assertThat;
  * @since 3.26.2017
  */
 public class CalculateTest {
-	
-	/**
+
+	/**.
 	 * Тестирование класса Calculate
 	 * @param none
-	 * @return void	 
 	 */
 	@Test
 	public void whenAddOneToOneThenTwo() {
