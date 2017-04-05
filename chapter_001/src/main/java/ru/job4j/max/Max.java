@@ -1,7 +1,7 @@
 package ru.job4j.max;
 
 /**.
- * Class Max решение задачи части 3 урока 3.1
+ * Class Max СЂРµС€РµРЅРёРµ Р·Р°РґР°С‡Рё С‡Р°СЃС‚Рё 3 СѓСЂРѕРєР° 3.1
  * @author Mikhail Vlasov
  * @since 4.4.2017
  * @version 1
@@ -9,10 +9,10 @@ package ru.job4j.max;
 public class Max {
 
 	/**
-	 * Определяет максимальное из двух чисел.
-	 * @param first первое число
-	 * @param second второе число
-	 * @return int большее из двух чисел
+	 * РћРїСЂРµРґРµР»СЏРµС‚ РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ РёР· РґРІСѓС… С‡РёСЃРµР».
+	 * @param first РїРµСЂРІРѕРµ С‡РёСЃР»Рѕ
+	 * @param second РІС‚РѕСЂРѕРµ С‡РёСЃР»Рѕ
+	 * @return int Р±РѕР»СЊС€РµРµ РёР· РґРІСѓС… С‡РёСЃРµР»
 	 */
 	public int max(int first, int second) {
 		int maximum;

@@ -14,7 +14,7 @@ import static org.junit.Assert.assertThat;
 public class MaxTest {
 
 	/**.
-	 * Тестирование класса Max метод метод наибольшего из двух.
+	 * РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ РєР»Р°СЃСЃР° Max РјРµС‚РѕРґ РјРµС‚РѕРґ РЅР°РёР±РѕР»СЊС€РµРіРѕ РёР· РґРІСѓС….
 	 * @param none
 	 */
 	@Test
