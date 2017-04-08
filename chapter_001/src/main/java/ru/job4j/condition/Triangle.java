@@ -1,5 +1,8 @@
 package ru.job4j.condition;
 
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
 /**.
  * Class Point solving task for part 3 lesson 3.3
  * @author Mikhail Vlasov
@@ -41,11 +44,11 @@ public class Triangle {
 	 */
 	public double area() {
 		//calculate the triangle area
-		double aB = Math.sqrt(Math.pow((double) (this.a.getX() - this.b.getX()), 2D) + Math.pow((double) (this.a.getY() - this.b.getY()), 2D));
-		double bC = Math.sqrt(Math.pow((double) (this.b.getX() - this.c.getX()), 2D) + Math.pow((double) (this.b.getY() - this.c.getY()), 2D));
-		double aC = Math.sqrt(Math.pow((double) (this.a.getX() - this.c.getX()), 2D) + Math.pow((double) (this.a.getY() - this.c.getY()), 2D));
+		double aB = lineLength(this.a, this.b);
+		double bC = lineLength(this.b, this.c);
+		double aC = lineLength(this.a, this.c);
 		double semiperimeter = (aB + aC + bC) / 2;
-		double area = Math.sqrt((semiperimeter - aB) * (semiperimeter - aC) * (semiperimeter - bC) * semiperimeter);
+		double area = sqrt((semiperimeter - aB) * (semiperimeter - aC) * (semiperimeter - bC) * semiperimeter);
 
 		if (area == 0) {
 			System.out.println("No triangle can be built");
@@ -53,5 +56,15 @@ public class Triangle {
 		}
 
 		return area;
+	}
+
+	/**.
+	 * Calculating line length
+	 * @param first point of the line
+	 * @param second point of the line
+	 * @return double length
+	 */
+	private double lineLength(Point first, Point second) {
+		return sqrt(pow((double) (first.getX() - second.getX()), 2D) + pow((double) (first.getY() - second.getY()), 2D));
 	}
 }
