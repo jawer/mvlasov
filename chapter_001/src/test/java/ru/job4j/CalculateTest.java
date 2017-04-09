@@ -16,7 +16,7 @@ import static org.junit.Assert.assertThat;
 public class CalculateTest {
 
 	/**.
-	 * Тестирование класса Calculate
+	 * Class CalculateTest
 	 * @param none
 	 */
 	@Test
