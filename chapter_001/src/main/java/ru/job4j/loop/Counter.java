@@ -17,10 +17,9 @@ public class Counter {
 	public int add(int start, int finish) {
 		int sumOfEvenNumbers = 0;
 		for (; start <= finish; start++) {
-			if (start % 2 != 0) {
-				continue;
+			if (start % 2 == 0) {
+				sumOfEvenNumbers += start;
 			}
-			sumOfEvenNumbers = sumOfEvenNumbers + start;
 		}
 		return sumOfEvenNumbers;
 	}
