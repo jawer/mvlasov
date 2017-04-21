@@ -29,7 +29,7 @@ public class SubString {
 		for (int i = 0; i < charArray.length; i++) {
 			if (charArray[i] == charSubArray[0]) {
 				/**.
-				 * Checks char array of the string contains one symbol
+				 * Checks if char array of the string contains one symbol
 				 */
 				if (charSubArray.length == 1) {
 					return true;
