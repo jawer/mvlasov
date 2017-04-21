@@ -70,7 +70,7 @@ public class SubStringTest {
 	}
 
 	/**.
-	 * Class SubStringTest testing if string has same size as substring
+	 * Class SubStringTest testing if string has the same size as substring
 	 */
 	@Test
 	public void whenAddStringAndStringThenContain() {
