@@ -10,7 +10,7 @@ public class Calculate {
 	/**
 	 * Точка входа в программу, вывод строки в консоль.
 	 * @param args массив строк
-	*/
+     */
 	public static void main(String[] args) {
 		System.out.println("Hello World!");
 	}
