@@ -26,7 +26,7 @@ public class Doctor extends Profession {
      * @return String
      */
     public String heal(Profession profession) {
-        return "Доктор " + this.getName() + " лечит " + profession.getName();
+        return String.format("Доктор %s лечит %s", this.getName(), profession.getName());
     }
 
     /**.
