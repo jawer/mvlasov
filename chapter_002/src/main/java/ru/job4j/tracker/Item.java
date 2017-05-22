@@ -82,14 +82,15 @@ public class Item {
         /**.
          * If array of comments is full then increases array length and adds comment
          */
-        if (!comments[comments.length - 1].isEmpty()) {
-            String[] newComments = new String[comments.length + 1];
+        if (!(comments[comments.length - 1] == null)) {
+            String[] newComments = new String[comments.length + 100];
+            System.arraycopy(comments, 0, newComments, 0, comments.length);
             newComments[comments.length] = comment;
             comments = newComments;
+        } else {
             /**.
              * Otherwise adds comment at the end of the array of comments
              */
-        } else {
             for (int i = 0; i < comments.length; i++) {
                 if (comments[i] == null) {
                     comments[i] = comment;

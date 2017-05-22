@@ -31,23 +31,6 @@ public class Tracker {
     }
 
     /**.
-     * Checks how many not null elements 'items' has
-     * @return int not null elements
-     */
-    private int notNullElements() {
-        int indexCounter = items.length;
-        for (Item item : items) {
-            if (item == null) {
-                indexCounter--;
-            }
-        }
-        if (indexCounter == 0) {
-            return -1;
-        }
-        return indexCounter;
-    }
-
-    /**.
      * Adds item in array
      * @param item to add
      * @return Item
@@ -79,13 +62,12 @@ public class Tracker {
     public void delete(Item item) {
         String id = item.getId();
         Item[] temp = new Item[items.length];
-        System.arraycopy(items, 0, temp, 0, items.length - 1);
         for (int i = 0; i < items.length; i++) {
             if (items[i] != null && items[i].getId().equals(id)) {
                 /**.
                  * If an item found by id then moves array to the left in one position replacing the item
                  */
-                System.arraycopy(temp, i + 1, items, i, temp.length - 1 - i);
+                System.arraycopy(items, i + 1, items, i, temp.length - 1 - i);
                 items[items.length - 1] = null;
                 break;
             }
@@ -98,18 +80,21 @@ public class Tracker {
      */
     public Item[] findAll() {
         int index = 0;
-        int arrayIndex = notNullElements();
-        if (arrayIndex > 0) {
-            Item[] result = new Item[notNullElements()];
+        Item[] result = new Item[items.length];
 
-            for (int i = 0; i < items.length; i++) {
-                if (items[i] != null) {
-                    result[index++] = items[i];
-                }
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] != null) {
+                result[index++] = items[i];
             }
-            return result;
         }
-        return null;
+
+        if (index == 0) {
+            return null;
+        }
+
+        Item[] finalResult = new Item[index];
+        System.arraycopy(result, 0, finalResult, 0, finalResult.length);
+        return finalResult;
     }
 
     /**.
@@ -124,6 +109,10 @@ public class Tracker {
             if (items[i] != null && items[i].getName().equals(key)) {
                     result[index++] = items[i];
             }
+        }
+
+        if (index == 0) {
+            return null;
         }
 
         Item[] finalResult = new Item[index];
