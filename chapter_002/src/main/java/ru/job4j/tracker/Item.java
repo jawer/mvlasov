@@ -32,12 +32,11 @@ public class Item {
      * Constructor
      * @param name of task
      * @param description of task
-     * @param created date
      */
-    public Item(String name, String description, long created) {
+    public Item(String name, String description) {
         setName(name);
         setDescription(description);
-        setCreated(created);
+        setCreated();
     }
 
     /**.
@@ -68,10 +67,11 @@ public class Item {
 
     /**.
      * Setter
-     * @param created date
      */
-    public void setCreated(long created) {
-        this.created = created;
+    public void setCreated() {
+        if (this.created == 0L) {
+            this.created = System.currentTimeMillis();
+        }
     }
 
     /**.

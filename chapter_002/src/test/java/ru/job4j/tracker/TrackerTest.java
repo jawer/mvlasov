@@ -16,7 +16,7 @@ public class TrackerTest {
     @Test
     public void whenAddItemThenTrackerHasOneItem() {
         Tracker tracker = new Tracker();
-        Item item = new Item("one", "first description", 111L);
+        Item item = new Item("one", "first description");
         tracker.add(item);
         assertThat(tracker.findAll()[0], is(item));
     }
@@ -27,7 +27,7 @@ public class TrackerTest {
     @Test
     public void whenUpdateItemInTrackerThenUpdatedItemInTracker() {
         Tracker tracker = new Tracker();
-        Item item = new Item("one", "first description", 111L);
+        Item item = new Item("one", "first description");
         tracker.add(item);
         item.setDescription("description changed");
         tracker.update(item);
@@ -40,8 +40,8 @@ public class TrackerTest {
     @Test
     public void whenDeleteItemInTrackerThenNullInTracker() {
         Tracker tracker = new Tracker();
-        Item item = new Item("one", "first description", 111L);
-        Item item2 = new Item("two", "second description", 222L);
+        Item item = new Item("one", "first description");
+        Item item2 = new Item("two", "second description");
         tracker.add(item);
         tracker.add(item2);
         tracker.delete(item);
@@ -54,8 +54,8 @@ public class TrackerTest {
     @Test
     public void whenFindAllThenNotNullElements() {
         Tracker tracker = new Tracker();
-        Item item = new Item("one", "first description", 111L);
-        Item item2 = new Item("two", "second description", 222L);
+        Item item = new Item("one", "first description");
+        Item item2 = new Item("two", "second description");
         tracker.add(item);
         tracker.add(item2);
         tracker.delete(item);
@@ -68,7 +68,7 @@ public class TrackerTest {
     @Test
     public void whenPutNameThenArrayOfMatchingElements() {
         Tracker tracker = new Tracker();
-        Item item = new Item("one", "first description", 111L);
+        Item item = new Item("one", "first description");
         tracker.add(item);
         Item[] result = tracker.findByName("one");
         Item[] expected = {item};
@@ -81,7 +81,7 @@ public class TrackerTest {
     @Test
     public void whenPutIdThenElementWithMatchingId() {
         Tracker tracker = new Tracker();
-        Item item = new Item("one", "first description", 111L);
+        Item item = new Item("one", "first description");
         tracker.add(item);
         Item result = tracker.findById(item.getId());
         assertThat(result, is(item));

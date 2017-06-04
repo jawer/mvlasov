@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
 import java.util.Random;
+import static java.lang.Math.abs;
 
 /**.
  * Class Tracker puts all tasks in array
@@ -27,7 +28,7 @@ public class Tracker {
      * @return String id
      */
     private String generateId() {
-        return String.valueOf(System.currentTimeMillis() + RAND.nextLong());
+        return String.valueOf(abs(System.currentTimeMillis() + RAND.nextLong()));
     }
 
     /**.
