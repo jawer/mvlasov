@@ -14,11 +14,16 @@ public class StartUI {
      */
     private Input input;
     /**.
+     * Variable for Tracker
+     */
+    private Tracker tracker;
+    /**.
      * Constructor for StartUI class.
      * @param input interface.
      */
     public StartUI(Input input) {
         this.input = input;
+        this.tracker = new Tracker();
     }
 
     /**.
@@ -55,10 +60,6 @@ public class StartUI {
                         + "5. Find items by name" + System.lineSeparator()
                         + "6. Exit Program" + System.lineSeparator();
         /**.
-         * Class Tracker object initialization.
-         */
-        Tracker tracker = new Tracker();
-        /**.
          * Contains user's choice.
          */
         String choise = input.ask(question);
@@ -71,17 +72,21 @@ public class StartUI {
 
             } else if ("1".equals(choise)) {
                 Item[] items = tracker.findAll();
-                for (Item item: items) {
-                    System.out.println(String.format("Name of task: %s"
-                                                    + System.lineSeparator()
-                                                    + "Description: %s"
-                                                    + System.lineSeparator()
-                                                    + "ID: %s"
-                                                    + System.lineSeparator()
-                                                    + "Date of creation: %s",
-                            item.getName(), item.getDescription(), item.getId(), simpleDateFormat.format(item.getCreated())
-                    ));
-                    System.lineSeparator();
+                if (items == null) {
+                    System.out.println("No tasks available.");
+                } else {
+                    for (Item item : items) {
+                        System.out.println(String.format("Name of task: %s"
+                                        + System.lineSeparator()
+                                        + "Description: %s"
+                                        + System.lineSeparator()
+                                        + "ID: %s"
+                                        + System.lineSeparator()
+                                        + "Date of creation: %s",
+                                item.getName(), item.getDescription(), item.getId(), simpleDateFormat.format(item.getCreated())
+                        ));
+                        System.lineSeparator();
+                    }
                 }
 
             } else if ("2".equals(choise)) {
