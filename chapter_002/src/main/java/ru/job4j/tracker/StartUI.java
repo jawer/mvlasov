@@ -18,6 +18,10 @@ public class StartUI {
      */
     private Tracker tracker;
     /**.
+     * Constants for menu choice.
+     */
+    private static final int ZERO = 0, ONE = 1, TWO = 2, THREE = 3, FOUR = 4, FIVE = 5, SIX = 6;
+    /**.
      * Constructor for StartUI class.
      * @param input interface.
      */
@@ -62,15 +66,15 @@ public class StartUI {
         /**.
          * Contains user's choice.
          */
-        String choise = input.ask(question);
+        int choice = Integer.parseInt(input.ask(question));
 
-        while (!"6".equals(choise)) {
-            if ("0".equals(choise)) {
+        while (SIX != choice) {
+            if (ZERO == choice) {
                 String name = input.ask("Enter name: ");
                 String description = input.ask("Enter description: ");
                 tracker.add(new Item(name, description));
 
-            } else if ("1".equals(choise)) {
+            } else if (ONE == choice) {
                 Item[] items = tracker.findAll();
                 if (items == null) {
                     System.out.println("No tasks available.");
@@ -89,7 +93,7 @@ public class StartUI {
                     }
                 }
 
-            } else if ("2".equals(choise)) {
+            } else if (TWO == choice) {
                 String id = input.ask("Enter id of the task you want to edit: ");
                 Item item = tracker.findById(id);
 
@@ -101,8 +105,10 @@ public class StartUI {
                                                     + System.lineSeparator()
                                                     + "Description: %s"
                                                     + System.lineSeparator()
-                                                    + "ID: %s" + System.lineSeparator()
-                                                    + "Date of creation: %s",
+                                                    + "ID: %s"
+                                                    + System.lineSeparator()
+                                                    + "Date of creation: %s"
+                                                    + System.lineSeparator(),
                             item.getName(), item.getDescription(), item.getId(), simpleDateFormat.format(item.getCreated())
                     ));
                     String desc = input.ask("Enter new description: ");
@@ -110,7 +116,7 @@ public class StartUI {
                     tracker.update(item);
                 }
 
-            } else if ("3".equals(choise)) {
+            } else if (THREE == choice) {
                 String id = input.ask("Enter id of the task you want to edit: ");
                 Item item = tracker.findById(id);
 
@@ -122,7 +128,7 @@ public class StartUI {
                     System.out.println("The task was deleted.");
                 }
 
-            } else if ("4".equals(choise)) {
+            } else if (FOUR == choice) {
                 String id = input.ask("Enter id of the task you want to find: ");
                 Item item = tracker.findById(id);
 
@@ -139,7 +145,7 @@ public class StartUI {
                     ));
                 }
 
-            } else if ("5".equals(choise)) {
+            } else if (FIVE == choice) {
                 String name = input.ask("Enter name: ");
                 Item[] items = tracker.findByName(name);
 
@@ -159,7 +165,7 @@ public class StartUI {
                     }
                 }
             }
-            choise = input.ask(question);
+            choice = Integer.parseInt(input.ask(question));
         }
     }
 }
