@@ -29,6 +29,15 @@ public class StartUI {
         this.input = input;
         this.tracker = new Tracker();
     }
+    /**.
+     * Constructor for StartUI class.
+     * @param input interface.
+     * @param tracker object.
+     */
+    public StartUI(Input input, Tracker tracker) {
+        this.input = input;
+        this.tracker = tracker;
+    }
 
     /**.
      * Entry point.
@@ -117,7 +126,7 @@ public class StartUI {
                 }
 
             } else if (THREE == choice) {
-                String id = input.ask("Enter id of the task you want to edit: ");
+                String id = input.ask("Enter id of the task you want to delete: ");
                 Item item = tracker.findById(id);
 
                 if (item == null) {

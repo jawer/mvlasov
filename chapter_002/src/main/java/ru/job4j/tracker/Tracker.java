@@ -90,7 +90,7 @@ public class Tracker {
         }
 
         if (index == 0) {
-            return null;
+            return result;
         }
 
         Item[] finalResult = new Item[index];
