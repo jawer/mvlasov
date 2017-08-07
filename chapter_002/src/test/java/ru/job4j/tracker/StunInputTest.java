@@ -17,7 +17,7 @@ public class StunInputTest {
         // создаём Tracker
         Tracker tracker = new Tracker();
         //создаём StubInput с последовательностью действий
-        Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});
+        Input input = new StubInput(new String[]{"0", "test name", "desc", "y"});
         //   создаём StartUI и вызываем метод init()
         new StartUI(input, tracker).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
@@ -34,7 +34,7 @@ public class StunInputTest {
         //Напрямую добавляем заявку
         Item item = tracker.add(new Item("Test name 1", "Test description 1"));
         //создаём StubInput с последовательностью действий
-        Input input = new StubInput(new String[]{"1", "6"});
+        Input input = new StubInput(new String[]{"1", "y"});
         // создаём StartUI и вызываем метод init()
         new StartUI(input, tracker).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
@@ -48,7 +48,7 @@ public class StunInputTest {
     public void whenEditThenTrackerHasUpdatedDescription() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("Test name 2", "Test description 2"));
-        Input input = new StubInput(new String[]{"2", item.getId(), "New description", "6"});
+        Input input = new StubInput(new String[]{"2", item.getId(), "New name", "New description", "y"});
         new StartUI(input, tracker).init();
         // проверяем, что заявка изменилась.
         assertThat(tracker.findById(item.getId()).getDescription(), is("New description"));
@@ -61,7 +61,7 @@ public class StunInputTest {
     public void whenDeleteThenTrackerHasDeletedItem() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("Test name 3", "Test description 3"));
-        Input input = new StubInput(new String[]{"3", item.getId(), "6"});
+        Input input = new StubInput(new String[]{"3", item.getId(), "y"});
         new StartUI(input, tracker).init();
         Item expected = null;
         // проверяем, что заявка удалена.
@@ -76,7 +76,7 @@ public class StunInputTest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("Test name 4", "Test description 4"));
         String expectedID = tracker.findById(item.getId()).getId();
-        Input input = new StubInput(new String[]{"4", item.getId(), "6"});
+        Input input = new StubInput(new String[]{"4", item.getId(), "y"});
         new StartUI(input, tracker).init();
         // проверяем, что заявка найдена по ID.
         assertThat(tracker.findById(item.getId()).getId(), is(expectedID));
@@ -89,24 +89,11 @@ public class StunInputTest {
     public void whenLookingByNameThenTrackerShowsItem() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("Test name 5", "Test description 5"));
-        Input input = new StubInput(new String[]{"5", "Test name 5", "6"});
+        Input input = new StubInput(new String[]{"5", "Test name 5", "y"});
         new StartUI(input, tracker).init();
         /**.
          * проверяем, что заявка найдена по имени.
          */
         assertThat(tracker.findById(item.getId()).getName(), is("Test name 5"));
-    }
-
-    /**.
-     * Tests program ending.
-     */
-    @Test
-    public void whenExetingThenExited() {
-        Tracker tracker = new Tracker();
-        Input input = new StubInput(new String[]{"6"});
-        new StartUI(input, tracker).init();
-        Item expected = null;
-        // проверяем, что заявка вышли из программы и заявка в трэкере не создана.
-        assertThat(tracker.findAll()[0], is(expected));
     }
 }
