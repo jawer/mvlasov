@@ -55,6 +55,18 @@ public class MenuTracker {
     }
 
     /**.
+     * Gets identification key for each menu option.
+     * @return int[] array of keys.
+     */
+    public int[] getUserActionKeys() {
+        int[] range = new int[actions.length];
+        for (int i = 0; i < range.length; i++) {
+            range[i] = actions[i].key();
+        }
+        return range;
+    }
+
+    /**.
      * Prints menu for tracker work.
      */
     public void show() {

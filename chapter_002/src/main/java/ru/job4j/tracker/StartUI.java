@@ -16,6 +16,10 @@ public class StartUI {
      */
     private Tracker tracker;
     /**.
+     * Array of menu keys.
+     */
+    private int[] ranges;
+    /**.
      * Constructor for StartUI class.
      * @param input interface.
      */
@@ -40,7 +44,7 @@ public class StartUI {
         /**.
          * ConsoleInput class object.
          */
-        Input input = new ConsoleInput();
+        Input input = new ValidateInput();
         /**.
          * Starts questionnaire function.
          */
@@ -56,10 +60,10 @@ public class StartUI {
         }
         MenuTracker menu = new MenuTracker(input, tracker);
         menu.fillActions();
+        ranges = menu.getUserActionKeys();
         do {
             menu.show();
-            int key = Integer.valueOf(input.ask("Select: "));
-            menu.select(key);
+            menu.select(input.ask("Please, select: ", ranges));
         } while (!"y".equals(input.ask("Exit?(y): ")));
     }
 }

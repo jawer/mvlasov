@@ -13,4 +13,12 @@ public interface Input {
      * @return String input.
      */
     String ask(String question);
+
+    /**.
+     * Asking a question overload.
+     * @param question for input.
+     * @param range of choice.
+     * @return int key.
+     */
+    int ask(String question, int[] range);
 }

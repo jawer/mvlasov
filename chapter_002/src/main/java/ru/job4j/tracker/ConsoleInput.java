@@ -23,4 +23,26 @@ public class ConsoleInput implements Input {
         System.out.print(question);
         return scanner.nextLine();
     }
+
+    /**.
+     * Asking and getting input from console using simple ask.
+     * @param question for user.
+     * @param range array of key range.
+     * @return int user input key.
+     */
+    public int ask(String question, int[] range) {
+        int key = Integer.valueOf(this.ask(question));
+        boolean exist = false;
+        for (int value : range) {
+            if (value == key) {
+                exist = true;
+                break;
+            }
+        }
+        if (exist) {
+            return key;
+        } else {
+            throw new MenuOutException("Out of menu range.");
+        }
+    }
 }
