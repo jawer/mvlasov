@@ -46,12 +46,12 @@ public class MenuTracker {
      * Fills menu for work with tracker.
      */
     public void fillActions() {
-        actions[0] = new AddItem();
-        actions[1] = new MenuTracker.ShowItems();
-        actions[2] = new EditItem();
-        actions[3] = new DeleteItem();
-        actions[4] = new FindItemById();
-        actions[5] = new FindItemByName();
+        actions[0] = new AddItem("Add new item.", 0);
+        actions[1] = new MenuTracker.ShowItems("Show items.", 1);
+        actions[2] = new EditItem("Edit item.", 2);
+        actions[3] = new DeleteItem("Delete item.", 3);
+        actions[4] = new FindItemById("Find item by item's id.", 4);
+        actions[5] = new FindItemByName("Find item by item's name.", 5);
     }
 
     /**.
@@ -91,7 +91,16 @@ public class MenuTracker {
      * @since 8.6.2017
      * @version 1
      */
-    private class AddItem implements UserAction {
+    private class AddItem extends BaseAction {
+        /**.
+         * Constructor for AddItem internal non static class.
+         * @param name of the action.
+         * @param key of the action.
+         */
+        AddItem(String name, int key) {
+            super(name, key);
+        }
+
         /**.
          * Returns id of the option.
          * @return int id.
@@ -110,14 +119,6 @@ public class MenuTracker {
             String desc = input.ask("Please, enter task's description: ");
             tracker.add(new Item(name, desc));
         }
-
-        /**.
-         * Contains info
-         * @return String info.
-         */
-        public String info() {
-            return String.format("%s. %s", key(), "Add new item.");
-        }
     }
 
     /**.
@@ -126,7 +127,16 @@ public class MenuTracker {
      * @since 8.6.2017
      * @version 1
      */
-    private static class ShowItems implements UserAction {
+    private static class ShowItems extends BaseAction {
+        /**.
+         * Constructor for ShowItems internal static class.
+         * @param name of the action.
+         * @param key of the action.
+         */
+        ShowItems(String name, int key) {
+            super(name, key);
+        }
+
         /**.
          * Returns id of the option.
          * @return int id.
@@ -159,14 +169,6 @@ public class MenuTracker {
                 }
             }
         }
-
-        /**.
-         * Contains info
-         * @return String info.
-         */
-        public String info() {
-            return String.format("%s. %s", key(), "Show items.");
-        }
     }
 }
 
@@ -176,7 +178,16 @@ public class MenuTracker {
  * @since 8.6.2017
  * @version 1
  */
-class EditItem implements UserAction {
+class EditItem extends BaseAction {
+    /**.
+     * Constructor for EditItem internal external class.
+     * @param name of the action.
+     * @param key of the action.
+     */
+    EditItem(String name, int key) {
+        super(name, key);
+    }
+
     /**.
      * Returns id of the option.
      * @return int id.
@@ -215,14 +226,6 @@ class EditItem implements UserAction {
             tracker.update(item);
         }
     }
-
-    /**.
-     * Contains info
-     * @return String info.
-     */
-    public String info() {
-        return String.format("%s. %s", key(), "Edit item.");
-    }
 }
 
 /**.
@@ -231,7 +234,16 @@ class EditItem implements UserAction {
  * @since 8.6.2017
  * @version 1
  */
-class DeleteItem implements UserAction {
+class DeleteItem extends BaseAction {
+    /**.
+     * Constructor for DeleteItem internal external class.
+     * @param name of the action.
+     * @param key of the action.
+     */
+    DeleteItem(String name, int key) {
+        super(name, key);
+    }
+
     /**.
      * Returns id of the option.
      * @return int id.
@@ -257,14 +269,6 @@ class DeleteItem implements UserAction {
             System.out.println("The task was deleted.");
         }
     }
-
-    /**.
-     * Contains info
-     * @return String info.
-     */
-    public String info() {
-        return String.format("%s. %s", key(), "Delete item.");
-    }
 }
 
 /**.
@@ -273,7 +277,16 @@ class DeleteItem implements UserAction {
  * @since 8.6.2017
  * @version 1
  */
-class FindItemById implements UserAction {
+class FindItemById extends BaseAction {
+    /**.
+     * Constructor for FindItemById internal external class.
+     * @param name of the action.
+     * @param key of the action.
+     */
+    FindItemById(String name, int key) {
+        super(name, key);
+    }
+
     /**.
      * Returns id of the option.
      * @return int id.
@@ -304,14 +317,6 @@ class FindItemById implements UserAction {
             ));
         }
     }
-
-    /**.
-     * Contains info
-     * @return String info.
-     */
-    public String info() {
-        return String.format("%s. %s", key(), "Find item by id item.");
-    }
 }
 
 /**.
@@ -320,7 +325,16 @@ class FindItemById implements UserAction {
  * @since 8.6.2017
  * @version 1
  */
-class FindItemByName implements UserAction {
+class FindItemByName extends BaseAction {
+    /**.
+     * Constructor for FindItemByName internal external class.
+     * @param name of the action.
+     * @param key of the action.
+     */
+    FindItemByName(String name, int key) {
+        super(name, key);
+    }
+
     /**.
      * Returns id of the option.
      * @return int id.
@@ -353,13 +367,5 @@ class FindItemByName implements UserAction {
                 ));
             }
         }
-    }
-
-    /**.
-     * Contains info
-     * @return String info.
-     */
-    public String info() {
-        return String.format("%s. %s", key(), "Find item by name item.");
     }
 }
