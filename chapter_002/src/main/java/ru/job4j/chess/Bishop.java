@@ -23,7 +23,8 @@ public class Bishop extends Figure {
         //Проверяем стоит ли заданная ячейка на пути слона.
         for (int i : bishopWayPattern) {
             int summ = startPoint + i;
-            while(summ >= 0 && summ <= destination && !Cell.getCell(summ).isCellAtTheEdge()) {
+            do {
+                summ += i;
                 if (destination == summ) {
                     //Если стоит, то создаём мвссив ячеек стоящих на пути.
                     int j = (destination - startPoint) / i - 1;
@@ -34,8 +35,7 @@ public class Bishop extends Figure {
                     }
                     return subCells;
                 }
-                summ += i;
-            }
+            } while (summ >= 0 && summ <= destination && !Cell.getCell(summ).isCellAtTheEdge());
         }
         throw new ImpossibleMoveException("Фигура туда пойти не может.");
     }

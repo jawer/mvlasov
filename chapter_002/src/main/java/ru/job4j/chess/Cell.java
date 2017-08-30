@@ -34,6 +34,13 @@ public class Cell {
     public Cell(int position) {
         chessBoard[position] = this;
         isOccupied = true;
+        for(Cell cell : chessBoard) {
+            for(int i : cellsAtTheEdge) {
+                if(cell.getCellPosition() == i) {
+                    cell.setCellsAtTheEdge();
+                }
+            }
+        }
     }
 
     void setOccupied() {

@@ -6,10 +6,10 @@ package ru.job4j.chess;
 public class Board {
     public Board () {
         //Создаём слона, которым ходим.
-        Figure figureBishop = new Bishop(new Cell(2));
+        //Figure figureBishop = new Bishop(new Cell(2));
 
         //Создаём слона, на которого нападаем.
-        Figure testBishop = new Bishop(new Cell(38));
+        //Figure testBishop = new Bishop(new Cell(38));
 
         //Инициализируем остальные поля как пустые.
         for (int i = 0; i < Cell.getChessBoard().length; i++) {
@@ -49,8 +49,9 @@ public class Board {
     public static void main(String[] args) throws ImpossibleMoveException, OccupiedWayException, FigureNotFoundException {
         //Создаём доску.
         Board board = new Board();
-
+        Figure figureBishop = new Bishop(new Cell(2));
+        Figure TestBishop = new Bishop(new Cell(38));
         //Делаем ход слоном.
-        board.move(Cell.getCell(2), Cell.getCell(36));
+        board.move(Cell.getCell(2), Cell.getCell(47));
     }
 }
