@@ -22,15 +22,19 @@ public class Bishop extends Figure {
         int startPoint = this.getPosition().getCellPosition();
         //Проверяем стоит ли заданная ячейка на пути слона.
         for (int i : bishopWayPattern) {
-            if ((destination - startPoint)% i == 0) {
-                //Если стоит, то создаём мвссив ячеек стоящих на пути.
-                int j = (destination - startPoint)/i - 1;
-                Cell[] subCells = new Cell[j];
-                Cell[] cells = Cell.getChessBoard();
-                for (int k = 0; k < j; k++) {
-                    subCells[k] = cells[startPoint + i * (k + 1)];
+            int summ = startPoint + i;
+            while(summ >= 0 && summ <= destination && !Cell.getCell(summ).isCellAtTheEdge()) {
+                if (destination == summ) {
+                    //Если стоит, то создаём мвссив ячеек стоящих на пути.
+                    int j = (destination - startPoint) / i - 1;
+                    Cell[] subCells = new Cell[j];
+                    Cell[] cells = Cell.getChessBoard();
+                    for (int k = 0; k < j; k++) {
+                        subCells[k] = cells[startPoint + i * (k + 1)];
+                    }
+                    return subCells;
                 }
-                return subCells;
+                summ += i;
             }
         }
         throw new ImpossibleMoveException("Фигура туда пойти не может.");

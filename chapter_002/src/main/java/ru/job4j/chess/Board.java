@@ -4,19 +4,23 @@ package ru.job4j.chess;
  * Created by hed1n on 23.08.2017.
  */
 public class Board {
-    //Массив фигур на доске.
-    //private static Figure[] figures = new Figure[2];
-    //private int index = 0;
+    public Board () {
+        //Создаём слона, которым ходим.
+        Figure figureBishop = new Bishop(new Cell(2));
 
-    //Добавляем фигуру.
-    /*public void addFigure(Figure figure) {
-        figures[index++] = figure;
-    }*/
+        //Создаём слона, на которого нападаем.
+        Figure testBishop = new Bishop(new Cell(38));
 
-    //Берём фигуру.
-    /*public Figure getFigure(int position) {
-        return figures[position];
-    }*/
+        //Инициализируем остальные поля как пустые.
+        for (int i = 0; i < Cell.getChessBoard().length; i++) {
+            if (Cell.getChessBoard()[i] == null) {
+                Cell.setCell(i, new Cell());
+            }
+        }
+
+        //Помечаем ячейки у края поля.
+        Cell.setEdgeCells();
+    }
 
    /* Метод должен проверить
    - Что в заданной ячейки есть фигура. если нет. то выкинуть исключение
@@ -42,35 +46,11 @@ public class Board {
         return true;
     }
 
-    public static void main(String[] args) {
-        //Board board = new Board();
-        //Figure firstBishop = new Bishop(new Cell());
-        //board.addFigure(firstBishop);
-
+    public static void main(String[] args) throws ImpossibleMoveException, OccupiedWayException, FigureNotFoundException {
         //Создаём доску.
         Board board = new Board();
 
-        //Создаём слона, которым ходим.
-        //board.addFigure(new Bishop(new Cell(2)));
-        //figures[0] = new Bishop(new Cell(2));
-        Figure figureBishop = new Bishop(new Cell(2));
-
-        //Создаём слона, на которого нападаем.
-        //board.addFigure(new Bishop(new Cell(38)));
-        //figures[1] = new Bishop(new Cell(38));
-        Figure testBishop = new Bishop(new Cell(38));
-
-        //Инициализируем остальные поля как пустые.
-        for (int i = 0; i < Cell.getChessBoard().length; i++) {
-            if (Cell.getChessBoard()[i] == null) {
-                Cell.setCell(i, new Cell());
-            }
-        }
-
         //Делаем ход слоном.
-        //Figure figureBishop = board.getFigure(0);
-        do {
-
-        } while (true);
+        board.move(Cell.getCell(2), Cell.getCell(36));
     }
 }
