@@ -5,10 +5,19 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-/**
- * Created by hed1n on 29.08.2017.
+/**.
+ * Class for board and bishop testing
+ * @author Mikhail Vlasov
+ * @since 8.29.2017
+ * @version 1
  */
 public class BoardTest {
+    /**.
+     * Tests bishop movement.
+     * @throws ImpossibleMoveException exception.
+     * @throws OccupiedWayException exception.
+     * @throws FigureNotFoundException exception.
+     */
     @Test
     public void whenMoveBishopThenTheBishopInNewCell() throws ImpossibleMoveException, OccupiedWayException, FigureNotFoundException {
         Board board = new Board();
@@ -17,6 +26,12 @@ public class BoardTest {
         assertThat(board.move(Cell.getCell(2), Cell.getCell(38)), is(true));
     }
 
+    /**.
+     * Tests FigureNotFoundException.
+     * @throws ImpossibleMoveException exception.
+     * @throws OccupiedWayException exception.
+     * @throws FigureNotFoundException exception.
+     */
     @Test
     public void whenTryingToMoveFromEmptyCellThenException() throws ImpossibleMoveException, OccupiedWayException, FigureNotFoundException {
         Board board = new Board();
@@ -29,13 +44,19 @@ public class BoardTest {
         }
     }
 
+    /**.
+     * Tests OccupiedWayException.
+     * @throws ImpossibleMoveException exception.
+     * @throws OccupiedWayException exception.
+     * @throws FigureNotFoundException exception.
+     */
     @Test
     public void whenTryingToMoveBishopByOccupiedWayThenException() throws ImpossibleMoveException, OccupiedWayException, FigureNotFoundException {
         Board board = new Board();
         //Создаём слона, которым ходим.
         Figure figureBishop = new Bishop(new Cell(2));
         //Создаём тестового слона, через которого пытаемся перепрыгнуть.
-        Figure TestBishop = new Bishop(new Cell(38));
+        Figure testBishop = new Bishop(new Cell(38));
         try {
             board.move(Cell.getCell(2), Cell.getCell(47));
         } catch (Throwable throwable) {
@@ -43,6 +64,12 @@ public class BoardTest {
         }
     }
 
+    /**.
+     * Tests ImpossibleMoveException.
+     * @throws ImpossibleMoveException exception.
+     * @throws OccupiedWayException exception.
+     * @throws FigureNotFoundException exception.
+     */
     @Test
     public void whenTryingToMoveBishopToIncorrectCellThenException() throws ImpossibleMoveException, OccupiedWayException, FigureNotFoundException {
         Board board = new Board();
