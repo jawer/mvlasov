@@ -1,5 +1,8 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 import static java.lang.Math.abs;
 
@@ -11,13 +14,9 @@ import static java.lang.Math.abs;
  */
 public class Tracker {
     /**.
-     * General array for tasks
+     * General ArrayList for Item tasks.
      */
-    private Item[] items = new Item[100];
-    /**.
-     * Position for new Item
-     */
-    private int position = 0;
+    private List<Item> items = new ArrayList<>();
     /**.
      * Random object
      */
@@ -38,7 +37,7 @@ public class Tracker {
      */
     public Item add(Item item) {
         item.setId(generateId());
-        this.items[position++] = item;
+        this.items.add(item);
         return item;
     }
 
@@ -48,9 +47,9 @@ public class Tracker {
      */
     public void update(Item item) {
         String id = item.getId();
-        for (int i = 0; i < items.length; i++) {
-            if (items[i] != null && items[i].getId().equals(id)) {
-                items[i] = item;
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).getId().equals(id)) {
+                items.set(i, item);
                 break;
             }
         }
@@ -62,17 +61,15 @@ public class Tracker {
      */
     public void delete(Item item) {
         String id = item.getId();
-        Item[] temp = new Item[items.length];
-        for (int i = 0; i < items.length; i++) {
-            if (items[i] != null && items[i].getId().equals(id)) {
-                /**.
-                 * If an item found by id then moves array to the left in one position replacing the item
-                 */
-                System.arraycopy(items, i + 1, items, i, temp.length - 1 - i);
-                items[items.length - 1] = null;
+        Iterator<Item> itr = items.iterator();
+        while (itr.hasNext()) {
+            Item tempItem = itr.next();
+            if (tempItem.getId().equals(id)) {
+                itr.remove();
                 break;
             }
         }
+
     }
 
     /**.
@@ -80,22 +77,11 @@ public class Tracker {
      * @return Item[] array
      */
     public Item[] findAll() {
-        int index = 0;
-        Item[] result = new Item[items.length];
-
-        for (int i = 0; i < items.length; i++) {
-            if (items[i] != null) {
-                result[index++] = items[i];
-            }
+        if (items.size() == 0) {
+            throw new MenuOutException("В трэкере нет заявок.");
         }
-
-        if (index == 0) {
-            return result;
-        }
-
-        Item[] finalResult = new Item[index];
-        System.arraycopy(result, 0, finalResult, 0, finalResult.length);
-        return finalResult;
+        Item[] resultArray = new Item[items.size()];
+        return items.toArray(resultArray);
     }
 
     /**.
@@ -104,21 +90,14 @@ public class Tracker {
      * @return Item[] array
      */
     public Item[] findByName(String key) {
-        Item[] result = new Item[items.length];
-        int index = 0;
-        for (int i = 0; i < items.length; i++) {
-            if (items[i] != null && items[i].getName().equals(key)) {
-                    result[index++] = items[i];
+        List<Item> tempList = new ArrayList<>();
+        for (Item item : items) {
+            if (item.getName().equals(key)) {
+                tempList.add(item);
             }
         }
-
-        if (index == 0) {
-            return null;
-        }
-
-        Item[] finalResult = new Item[index];
-        System.arraycopy(result, 0, finalResult, 0, finalResult.length);
-        return finalResult;
+        Item[] resultArray = new Item[tempList.size()];
+        return tempList.toArray(resultArray);
     }
 
     /**.
@@ -129,7 +108,7 @@ public class Tracker {
     public Item findById(String id) {
         Item result = null;
         for (Item item : items) {
-            if (item != null && item.getId().equals(id)) {
+            if (item.getId().equals(id)) {
                 result = item;
                 break;
             }

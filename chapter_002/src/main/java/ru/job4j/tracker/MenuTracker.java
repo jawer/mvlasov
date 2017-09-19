@@ -1,6 +1,8 @@
 package ru.job4j.tracker;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**.
  * Class MenuTracker contains menu and actions for each option.
@@ -18,9 +20,9 @@ public class MenuTracker {
      */
     private Tracker tracker;
     /**.
-     * Array for actions
+     * ArrayList for actions
      */
-    private UserAction[] actions = new UserAction[6];
+    private List<UserAction> actions = new ArrayList<>();
     /**.
      * Simple date and time of item creation pattern.
      */
@@ -46,12 +48,12 @@ public class MenuTracker {
      * Fills menu for work with tracker.
      */
     public void fillActions() {
-        actions[0] = new AddItem("Add new item.", 0);
-        actions[1] = new MenuTracker.ShowItems("Show items.", 1);
-        actions[2] = new EditItem("Edit item.", 2);
-        actions[3] = new DeleteItem("Delete item.", 3);
-        actions[4] = new FindItemById("Find item by item's id.", 4);
-        actions[5] = new FindItemByName("Find item by item's name.", 5);
+        actions.add(new AddItem("Add new item.", 0));
+        actions.add(new MenuTracker.ShowItems("Show items.", 1));
+        actions.add(new EditItem("Edit item.", 2));
+        actions.add(new DeleteItem("Delete item.", 3));
+        actions.add(new FindItemById("Find item by item's id.", 4));
+        actions.add(new FindItemByName("Find item by item's name.", 5));
     }
 
     /**.
@@ -59,9 +61,10 @@ public class MenuTracker {
      * @return int[] array of keys.
      */
     public int[] getUserActionKeys() {
-        int[] range = new int[actions.length];
-        for (int i = 0; i < range.length; i++) {
-            range[i] = actions[i].key();
+        int[] range = new int[actions.size()];
+        int position = 0;
+        for (UserAction userAction : actions) {
+            range[position++] = userAction.key();
         }
         return range;
     }
@@ -71,9 +74,7 @@ public class MenuTracker {
      */
     public void show() {
         for (UserAction action : actions) {
-            if (action != null) {
-                System.out.println(action.info());
-            }
+            System.out.println(action.info());
         }
     }
 
@@ -82,7 +83,7 @@ public class MenuTracker {
      * @param key id
      */
     public void select(int key) {
-        this.actions[key].execute(input, tracker);
+        this.actions.get(key).execute(input, tracker);
     }
 
     /**.

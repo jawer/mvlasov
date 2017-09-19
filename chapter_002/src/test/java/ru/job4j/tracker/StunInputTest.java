@@ -65,7 +65,7 @@ public class StunInputTest {
         new StartUI(input, tracker).init();
         Item expected = null;
         // проверяем, что заявка удалена.
-        assertThat(tracker.findAll()[0], is(expected));
+        assertThat(tracker.findById(item.getId()), is(expected));
     }
 
     /**.
