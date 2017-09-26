@@ -17,8 +17,6 @@ public class SortUser {
      * @return Set<User> of users.
      */
     public Set<User> sort(List<User> userList) {
-        Set<User> userSet = new TreeSet<>();
-        userSet.addAll(userList);
-        return userSet;
+        return new TreeSet<>(userList);
     }
 }
