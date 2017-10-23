@@ -41,10 +41,44 @@ public class Node {
     }
 
     /**.
-     * Converts Node to be root.
+     * Getter
+     * @return int value.
+     */
+    public int getValue() {
+        return value;
+    }
+
+    /**.
+     * Converts 1 > 2 > 3 to 3 >  2 > 1.
      * @param root object.
      */
-    void convert(Node root) {
-        root.setNext(this);
+    static void convert(Node root) {
+        //root.setNext(this);
+        //Считаем сколько в списке объектов.
+        Node first = root;
+        Node current = root;
+        int count = 0;
+        do {
+            count++;
+            current = current.next;
+        } while (current != null);
+
+        //Создаём массив по количеству объектов в списке и заполняем его в обратном порядке.
+        //1 > 2 > 3 => {3, 2, 1}
+        Node[] nodeArray = new Node[count];
+        current = first;
+        do {
+            nodeArray[count - 1] = current;
+            current = current.next;
+            count--;
+        } while (current != null);
+
+        //Связываем элементы массива в список: 3 > 2 > 1.
+        for (int i = 0; i < nodeArray.length - 1; i++) {
+            nodeArray[i].next = nodeArray[i + 1];
+        }
+
+        //Последний элемент указывает на null.
+        nodeArray[nodeArray.length - 1].next = null;
     }
 }
