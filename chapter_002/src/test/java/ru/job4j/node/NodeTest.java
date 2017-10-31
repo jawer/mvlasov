@@ -24,14 +24,14 @@ public class NodeTest {
         Node n3 = new Node(3);
         Node n4 = new Node(4);
 
-        //1 > 2 > 3
+        //1 > 2 > 3 > 4
         n1.setNext(n2);
         n2.setNext(n3);
         n3.setNext(n4);
 
-        //3 > 2 > 1
+        //4 > 3 > 2 > 1
         Node.convert(n1);
 
-        assertThat(n3.getNext().getNext(), is(n1));
+        assertThat(n4.getNext().getNext().getNext(), is(n1));
     }
 }

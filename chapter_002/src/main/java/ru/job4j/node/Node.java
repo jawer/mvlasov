@@ -50,35 +50,28 @@ public class Node {
 
     /**.
      * Converts 1 > 2 > 3 to 3 >  2 > 1.
+     * Перебираем все элементы списка и на каждой итерации меняем значение поля next так,
+     * чтобы оно указывало на предыдущий элемент.
      * @param root object.
      */
     static void convert(Node root) {
-        //root.setNext(this);
-        //Считаем сколько в списке объектов.
-        Node first = root;
-        Node current = root;
-        int count = 0;
-        do {
-            count++;
-            current = current.next;
-        } while (current != null);
-
-        //Создаём массив по количеству объектов в списке и заполняем его в обратном порядке.
-        //1 > 2 > 3 => {3, 2, 1}
-        Node[] nodeArray = new Node[count];
-        current = first;
-        do {
-            nodeArray[count - 1] = current;
-            current = current.next;
-            count--;
-        } while (current != null);
-
-        //Связываем элементы массива в список: 3 > 2 > 1.
-        for (int i = 0; i < nodeArray.length - 1; i++) {
-            nodeArray[i].next = nodeArray[i + 1];
+        int counter = 0;
+        Node nextNode = root;
+        Node previousNode = root;
+        Node currentNode = root;
+        while (nextNode != null) {
+            //Если первый элемент списка, то:
+            if (counter == 0) {
+                nextNode = currentNode.getNext();
+                currentNode.setNext(null);
+            //Иначе для всех последующих элементов:
+            } else {
+                currentNode = nextNode;
+                nextNode = currentNode.getNext();
+                currentNode.setNext(previousNode);
+                previousNode = currentNode;
+            }
+            counter++;
         }
-
-        //Последний элемент указывает на null.
-        nodeArray[nodeArray.length - 1].next = null;
     }
 }
