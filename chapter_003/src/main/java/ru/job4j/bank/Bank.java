@@ -58,13 +58,7 @@ public class Bank {
      * @param account который удаляем.
      */
     public void deleteAccountFromUser(User user, Account account) {
-        Iterator<Account> itr = usersAndAccounts.get(user).iterator();
-        while (itr.hasNext()) {
-            if (itr.next().getRequisites() == account.getRequisites()) {
-                itr.remove();
-                break;
-            }
-        }
+        usersAndAccounts.get(user).remove(account);
     }
 
     /**.
@@ -92,19 +86,17 @@ public class Bank {
         Integer srcAccountIndex = null, dstAccountIndex = null;
 
         srcAccountIndex = srcAccountList.indexOf(srcAccount);
-        //Проверяем, запрашиваемый счёт, с которого отправляем. Существует ли и принадлежит ли пользователю.
-        if (srcAccountIndex == null || srcAccountIndex < 0) {
-            return false;
-        }
-
-        //Проверяем, хватает ли средств на счёте отправителя.
-        if (srcAccountList.get(srcAccountIndex).getValue() < amount) {
-            return false;
-        }
-
         dstAccountIndex = dstAccountList.indexOf(dstAccount);
-        //Проверяем, запрашиваемый счёт, на который отправляем. Существует ли и принадлежит ли пользователю.
-        if (dstAccountIndex == null || dstAccountIndex < 0) {
+        //Проверяем, запрашиваемый счёт, с которого отправляем. Существует ли,
+        //Принадлежит ли пользователю.
+        //Проверяем также, хватает ли средств на счёте отправителя.
+        //Проверяем, запрашиваемый счёт, на который отправляем. Существует ли,
+        // Принадлежит ли пользователю.
+        if (srcAccountIndex == null
+                || srcAccountIndex < 0
+                || srcAccountList.get(srcAccountIndex).getValue() < amount
+                || dstAccountIndex == null
+                || dstAccountIndex < 0) {
             return false;
         }
 
