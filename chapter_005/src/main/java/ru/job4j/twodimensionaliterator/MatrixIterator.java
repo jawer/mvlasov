@@ -45,7 +45,7 @@ public class MatrixIterator implements Iterator {
      */
     @Override
     public Object next() {
-        if (hasNext() == false) {
+        if (!hasNext()) {
             throw new NoSuchElementException("Out of array bound.");
         } else if (x + 1 == values.length && y + 1 == values[x].length) {
             return values[x++][y++];
