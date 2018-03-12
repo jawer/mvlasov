@@ -33,10 +33,7 @@ public class MatrixIterator implements Iterator {
      */
     @Override
     public boolean hasNext() {
-        if (x == values.length || y == values[x].length) {
-            throw new NoSuchElementException("Out of array bound.");
-        }
-        return values.length > x || values[x].length > y;
+        return values.length > x && values[x].length > y;
     }
 
     /**.
