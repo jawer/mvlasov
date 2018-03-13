@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
  * Class EvenNumbersIterator implements Iterator for even numbers.
  * @author Mikhail Vlasov
  * @since 03.06.2018
- * @version 2
+ * @version 3
  */
 public class EvenNumbersIterator implements Iterator {
     /**.
@@ -33,15 +33,12 @@ public class EvenNumbersIterator implements Iterator {
      */
     @Override
     public boolean hasNext() {
-        boolean isEvenNumAvailable = false;
+        int tempIndex = x;
 
-        for (int i = x; i < values.length; i++) {
-            if (values[i] % 2 == 0) {
-                isEvenNumAvailable = true;
-                break;
-            }
+        while (tempIndex < values.length && values[tempIndex] % 2 != 0) {
+            tempIndex++;
         }
-        return isEvenNumAvailable;
+        return tempIndex < values.length;
     }
 
     /**.
@@ -50,21 +47,12 @@ public class EvenNumbersIterator implements Iterator {
      */
     @Override
     public Object next() {
-        boolean evenNumFound = false;
-        int resultNum = -1;
-
-        if (!hasNext()) {
-            throw new NoSuchElementException("Out of array bound.");
-        }
-        do {
-            if (values[x] % 2 == 0) {
-                resultNum = values[x++];
-                evenNumFound = true;
-                break;
-            }
-            x++;
-        } while (hasNext());
-
-        return resultNum;
+       while (hasNext()) {
+           if (values[x] % 2 == 0) {
+               return values[x++];
+           }
+           x++;
+       }
+       throw new NoSuchElementException("Out of array bound.");
     }
 }
