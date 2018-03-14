@@ -35,20 +35,12 @@ public class PrimeIterator implements Iterator {
      */
     @Override
     public boolean hasNext() {
-        //Метка, если простое число найдено.
-        boolean isPrimeNumFound = false;
+        int tempIndex = x;
 
-        for (int i = x; !isPrimeNumFound && i < numbers.length; i++) {
-            //Проверяем, если есть числа 2 или 3 - простые числа.
-            if (numbers[i] == 2 || numbers[i] == 3) {
-                isPrimeNumFound = true;
-                break;
-            }
-
-            //Ищем делители от 2 до квадратного корня из искомого числа.
-            isPrimeNumFound = primeNumFinder(2, i);
+        while (tempIndex < numbers.length && !isPrimeNumAvailable(numbers[tempIndex])) {
+            tempIndex++;
         }
-        return isPrimeNumFound;
+        return tempIndex < numbers.length;
     }
 
     /**.
@@ -57,38 +49,32 @@ public class PrimeIterator implements Iterator {
      */
     @Override
     public Object next() {
-        //Результат.
-        int resultNum = -1;
-        //Если нет больше простых чисел, то генерируем исключение.
-        if (!hasNext()) {
-            throw new NoSuchElementException("Out of array bound.");
-        }
-
-        //Поиск.
-        do {
-            if (primeNumFinder(2, x) || numbers[x] == 2 || numbers[x] == 3) {
-                resultNum = numbers[x++];
-                break;
-            } else {
-                x++;
+        while (hasNext()) {
+            if (isPrimeNumAvailable(numbers[x])) {
+                return numbers[x++];
             }
-        } while (hasNext());
-
-        return resultNum;
+            x++;
+        }
+        throw new NoSuchElementException("Out of array bound.");
     }
 
     /**.
      * Looks for first available divisor of the square root of the number. If divisor found then returns false.
      * Otherwise returns true.
-     * @param start int first divisor.
-     * @param end int the number we looking a divisor for.
+     * @param endNum int the number we looking a divisor for.
      * @return boolean true if we got prime number.
      */
-    private boolean primeNumFinder(int start, int end) {
+    private boolean isPrimeNumAvailable(int endNum) {
         //Метка, если простое число найдено.
         boolean primeNumFound = false;
-        for (int j = start; j <= sqrt(numbers[end]); j++) {
-            if (numbers[end] % j == 0) {
+
+        //2 и 3 - простые числа.
+        if (endNum == 2 || endNum == 3) {
+            return true;
+        }
+
+        for (int j = 2; j <= sqrt(endNum); j++) {
+            if (endNum % j == 0) {
                 return false;
             }
             primeNumFound = true;
