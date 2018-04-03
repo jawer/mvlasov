@@ -27,7 +27,7 @@ public class NodeTest {
         n3.next(n4);
 
         assertThat(n1.getNext().getNext().getNext(), is(n4));
-        assertThat(Node.hasCycle(n1), is(false));
+        assertThat(n1.hasCycle(n1), is(false));
     }
 
     /**.
@@ -45,7 +45,7 @@ public class NodeTest {
         n3.next(n4);
         n4.next(n1);
 
-        assertThat(Node.hasCycle(n1), is(true));
+        assertThat(n1.hasCycle(n1), is(true));
     }
 
     /**.
@@ -62,6 +62,6 @@ public class NodeTest {
         n2.next(n3);
         n3.next(n2);
 
-        assertThat(Node.hasCycle(n1), is(true));
+        assertThat(n1.hasCycle(n1), is(true));
     }
 }

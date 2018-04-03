@@ -8,13 +8,10 @@ package ru.job4j.cyclechecker;
  */
 public class Node<T> {
     /**.
-     * Object counter.
-     */
-    private static int index = 0;
-    /**.
      * Reference to the next object.
      */
     private Node next;
+
     /**.
      * Node id
      */
@@ -26,7 +23,6 @@ public class Node<T> {
      */
     public Node(T value) {
         this.value = value;
-        setIndex();
     }
 
     /**.
@@ -54,36 +50,21 @@ public class Node<T> {
     }
 
     /**.
-     * Increases index by 1.
-     */
-    private static void setIndex() {
-        Node.index++;
-    }
-
-    /**.
-     * Gets index.
-     * @return int index.
-     */
-    public static int getIndex() {
-        return index;
-    }
-
-    /**.
-     * Checks if nodes are cycled.
+     * Checks if nodes are cycled based on Floyd's Tortoise and Hare algorithm.
      * @return boolean true if cycled, false if not.
      */
-    public static boolean hasCycle(Node first) {
-        int counter = 0;
-        Node nextNode = first;
+    public boolean hasCycle(Node first) {
+        Node tortoise = first;
+        Node hare = first.getNext();
 
-        while (nextNode != null) {
-            nextNode = nextNode.getNext();
-            counter++;
-            if (counter > getIndex()) {
-                return true;
+        while (tortoise != hare) {
+            //If current hare or next hare doesn't exist then no cycle.
+            if (hare == null || hare.getNext() == null) {
+                return false;
             }
+            tortoise = tortoise.getNext();
+            hare = hare.getNext().getNext();
         }
-
-        return false;
+        return true;
     }
 }
