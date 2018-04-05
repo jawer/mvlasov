@@ -14,19 +14,29 @@ public class SimpleArraySet<E> implements Iterable {
     /**.
      * Container.
      */
-    private SimpleArrayList<E> simpleArrayList = new SimpleArrayList<E>();
+    private SimpleArrayList<E> arrLst = new SimpleArrayList<E>();
 
+    /**.
+     * Adds value to the set.
+     * @param e value.
+     */
     public void add(E e) {
-        boolean hasEqual = false;
-        for (Object value : simpleArrayList) {
+        if (!contains(e)) {
+            arrLst.add(e);
+        }
+    }
+
+    /**.
+     * Checks if list contains specific value.
+     * @param e value.
+     */
+    public boolean contains(E e) {
+        for (Object value : arrLst) {
             if (e.equals((E) value)) {
-                hasEqual = true;
-                break;
+                return true;
             }
         }
-        if (!hasEqual) {
-            simpleArrayList.add(e);
-        }
+        return false;
     }
 
     /**.
@@ -36,7 +46,7 @@ public class SimpleArraySet<E> implements Iterable {
     @Override
     public Iterator iterator() {
         return new Iterator() {
-            private Iterator it = simpleArrayList.iterator();
+            private Iterator it = arrLst.iterator();
             @Override
             public boolean hasNext() {
                 return it.hasNext();
