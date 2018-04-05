@@ -15,23 +15,29 @@ public class SimpleLinkedSet<E> implements Iterable {
     /**.
      * Container.
      */
-    private SimpleLinkedList<E> simpleLinkedList = new SimpleLinkedList<E>();
+    private SimpleLinkedList<E> lnkLst = new SimpleLinkedList<E>();
 
     /**.
      * Adds value to the set.
      * @param e value.
      */
     public void add(E e) {
-        boolean hasEqual = false;
-        for (Object value : simpleLinkedList) {
+        if (!contains(e)) {
+            lnkLst.add(e);
+        }
+    }
+
+    /**.
+     * Checks if list contains specific value.
+     * @param e value.
+     */
+    public boolean contains(E e) {
+        for (Object value : lnkLst) {
             if (e.equals((E) value)) {
-                hasEqual = true;
-                break;
+                return true;
             }
         }
-        if (!hasEqual) {
-            simpleLinkedList.add(e);
-        }
+        return false;
     }
 
     /**.
@@ -41,7 +47,7 @@ public class SimpleLinkedSet<E> implements Iterable {
     @Override
     public Iterator iterator() {
         return new Iterator() {
-            private Iterator it = simpleLinkedList.iterator();
+            private Iterator it = lnkLst.iterator();
             @Override
             public boolean hasNext() {
                 return it.hasNext();
