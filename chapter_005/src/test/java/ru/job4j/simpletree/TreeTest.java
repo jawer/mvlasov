@@ -1,6 +1,9 @@
 package ru.job4j.simpletree;
 
 import org.junit.Test;
+
+import java.util.Iterator;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
@@ -39,5 +42,58 @@ public class TreeTest {
                 tree.findBy(7).isPresent(),
                 is(false)
         );
+    }
+
+    /**.
+     * Tests iterator().
+     */
+    @Test
+    public void whenAddElThenIteratorWorksOk() {
+        Tree<Integer> tree = new Tree<>(1);
+        tree.add(1, 2);
+        tree.add(1, 3);
+        tree.add(1, 4);
+        tree.add(4, 5);
+        tree.add(4, 6);
+        tree.add(5, 7);
+
+        Iterator<Node<Integer>> iter = tree.iterator();
+
+        assertThat(iter.next().getValue(), is(1));
+        assertThat(iter.hasNext(), is(true));
+        assertThat(iter.hasNext(), is(true));
+        assertThat(iter.next().getValue(), is(2));
+        assertThat(iter.hasNext(), is(true));
+        assertThat(iter.next().getValue(), is(3));
+        assertThat(iter.next().getValue(), is(4));
+        assertThat(iter.next().getValue(), is(5));
+        assertThat(iter.next().getValue(), is(6));
+        assertThat(iter.hasNext(), is(true));
+        assertThat(iter.next().getValue(), is(7));
+        assertThat(iter.hasNext(), is(false));
+    }
+
+    /**.
+     * Tests if binary.
+     */
+    @Test
+    public void whenCheckBinaryThenWorksOk() {
+        Tree<Integer> tree = new Tree<>(1);
+        tree.add(1, 2);
+        tree.add(1, 3);
+        tree.add(1, 4);
+        tree.add(4, 5);
+        tree.add(4, 6);
+        tree.add(5, 7);
+
+        Tree<Integer> binTree = new Tree<>(1);
+        tree.add(1, 2);
+        tree.add(1, 4);
+        tree.add(4, 5);
+        tree.add(4, 6);
+        tree.add(5, 7);
+
+        assertThat(tree.isBinary(), is(false));
+        assertThat(binTree.isBinary(), is(true));
     }
 }

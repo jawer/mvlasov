@@ -71,8 +71,32 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E>, Iterable<No
      */
     @Override
     public Iterator<Node<E>> iterator() {
+        List<Node<E>> allChildren = new ArrayList<>();
+        allChildren.add(root);
+        int index = 0;
+        List<Node<E>> allChTemp = new ArrayList<>();
+        Iterator<Node<E>> iter;
+
+        do {
+            iter = allChildren.listIterator(index);
+
+            while (iter.hasNext()) {
+                Node<E> n = iter.next();
+                if (!n.leaves().isEmpty()) {
+                    allChTemp.addAll(n.leaves());
+                }
+                index++;
+            }
+
+            allChildren.addAll(allChTemp);
+            allChTemp.clear();
+        } while (allChildren.size() != index);
+
+
         return new Iterator<Node<E>>() {
-            Iterator<Node<E>> it = root.leaves().iterator();
+
+            Iterator<Node<E>> it = allChildren.iterator();
+
             @Override
             public boolean hasNext() {
                 return it.hasNext();
@@ -83,5 +107,20 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E>, Iterable<No
                 return it.next();
             }
         };
+    }
+
+    /**.
+     * Checks if tree is binary.
+     * @return boolean result.
+     */
+    public boolean isBinary() {
+        Iterator<Node<E>> it = this.iterator();
+        while (it.hasNext()) {
+            if (it.next().leaves().size() > 2) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
