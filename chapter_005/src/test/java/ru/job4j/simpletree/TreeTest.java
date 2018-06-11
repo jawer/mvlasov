@@ -96,4 +96,33 @@ public class TreeTest {
         assertThat(tree.isBinary(), is(false));
         assertThat(binTree.isBinary(), is(true));
     }
+
+    /**.
+     * Tests binary tree.
+     */
+    @Test
+    public void whenAddElThenHaveIt() {
+        BinaryTree<Integer> bTree = new BinaryTree<>(5);
+        bTree.add(4);
+        bTree.add(6);
+        bTree.add(3);
+        bTree.add(5);
+        bTree.add(7);
+        bTree.add(6);
+
+        Iterator<BinaryTree.NodeB<Integer>> iter = bTree.iterator();
+
+        assertThat(iter.next().getValue(), is(5));
+        assertThat(iter.hasNext(), is(true));
+        assertThat(iter.hasNext(), is(true));
+        assertThat(iter.next().getValue(), is(4));
+        assertThat(iter.hasNext(), is(true));
+        assertThat(iter.next().getValue(), is(6));
+        assertThat(iter.next().getValue(), is(3));
+        assertThat(iter.next().getValue(), is(5));
+        assertThat(iter.next().getValue(), is(6));
+        assertThat(iter.hasNext(), is(true));
+        assertThat(iter.next().getValue(), is(7));
+        assertThat(iter.hasNext(), is(false));
+    }
 }
