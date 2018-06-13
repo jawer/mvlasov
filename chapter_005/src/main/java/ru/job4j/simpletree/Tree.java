@@ -116,12 +116,14 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E>, Iterable<No
      */
     public boolean isBinary() {
         Iterator<Node<E>> it = this.iterator();
+        boolean binary = true;
         while (it.hasNext()) {
             if (it.next().leaves().size() > 2) {
-                return false;
+                binary = false;
+                break;
             }
         }
 
-        return true;
+        return binary;
     }
 }
