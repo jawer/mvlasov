@@ -56,6 +56,9 @@ public class TreeTest {
         tree.add(4, 5);
         tree.add(4, 6);
         tree.add(5, 7);
+        tree.add(1, 7);
+        tree.add(9, 8);
+        tree.add(9, 6);
 
         Iterator<Node<Integer>> iter = tree.iterator();
 

@@ -33,12 +33,13 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E>, Iterable<No
      */
     @Override
     public boolean add(E parent, E child) {
-        Optional<Node<E>> opt = findBy(child);
-        if (opt.isPresent()) {
+        Optional<Node<E>> optCh = findBy(child);
+        Optional<Node<E>> optPa = findBy(parent);
+        if (optCh.isPresent() || !optPa.isPresent()) {
             return false;
         }
-        opt = findBy(parent);
-        opt.get().add(new Node<E>(child));
+        //opt = findBy(parent);
+        optPa.get().add(new Node<E>(child));
         return true;
     }
 
