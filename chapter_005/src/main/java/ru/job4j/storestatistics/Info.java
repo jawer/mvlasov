@@ -1,5 +1,6 @@
 package ru.job4j.storestatistics;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**.
@@ -40,24 +41,20 @@ public class Info {
      * Compares two user lists and creates statistics.
      */
     private void statistics() {
-            for (Store.User usrC : current) {
-                if (!previous.contains(usrC)) {
-                    added++;
-                    continue;
-                } else {
-                    if (usrC.isWasChanged()) {
-                        changed++;
-                        continue;
-                    }
-                }
+        HashMap<Store.User, String> usrMap = new HashMap<>();
+        for (Store.User usrP : previous) {
+            usrMap.put(usrP, usrP.getName());
+        }
 
+        for (Store.User usrC : current) {
+            String s = usrMap.put(usrC, usrC.getName());
+            if (s == null) {
+                added++;
+            } else if (usrC.isWasChanged()) {
+                changed++;
             }
-
-            for (Store.User usrP : previous) {
-                if (!current.contains(usrP)) {
-                    deleted++;
-                }
-            }
+        }
+        deleted = previous.size() + added - current.size();
     }
 
     /**.
